@@ -1,12 +1,11 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BFS {
     public int[][] directions= {{0,1},{0,-1},{1,0},{-1,0}};
     public int BFSsearch (int[][] grid, int startI, int startJ, int endI, int endJ, List<int[]> pathList) {
-        int cost = 0;
+        int nodesExplored = 0;
 
+        Set<String> visitedSet = new HashSet();
         // queue that holds next x and y pairs:
         Queue<int[]> queue = new LinkedList();
         queue.offer(new int[] {startI, startJ});
@@ -14,17 +13,22 @@ public class BFS {
         while (!queue.isEmpty()) {
             int[] currCoord = queue.poll();
             int i = currCoord[0], j = currCoord[1];
+            String currCords = i+"~"+j;
 
-            //check out of bounds
+            if (visitedSet.contains(currCords))
+                continue;
+
+            //reached end:
+            if (i == endI && j == endJ) {
+                System.out.println("found target after exploring "+nodesExplored+ " nodes");
+            }
+
+            //check out of bounds or if it's wall
             if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length || grid[i][j] != 0)
                 continue;
 
-            //reached end, quit:
-            if (i == endI && j == endJ)
-                return cost+1;
-
-            grid[i][j] = -1; //mark as visited
-            cost++;
+            visitedSet.add(currCords);
+            nodesExplored++;
             pathList.add(new int[] {i, j});
 
             for(int k = 0; k < directions.length; k++) {
@@ -32,6 +36,6 @@ public class BFS {
                 queue.offer(new int[]{r, c});
             }
         }
-        return cost;
+        return nodesExplored;
     }
 }

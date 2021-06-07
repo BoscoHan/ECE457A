@@ -7,24 +7,24 @@ public class Main {
         int[][] grid = resetGrid();
         BFS bfs = new BFS();
 
-//start at S, end on E1
+    //start at S, end on E1
         List<int[]> E1pathList = new ArrayList();
         int costE1 = bfs.BFSsearch(grid, 13, 2, 5, 23, E1pathList);
-        System.out.println("\n finished BFS to E1, cost of: " + costE1);
+        System.out.println("\n finished BFS to E1, total nodes explored: " + costE1);
         E1pathList.forEach(array -> System.out.print(Arrays.toString(array)));
 
     //start at S, end on E2
         int[][] grid2 = resetGrid();
         List<int[]> E2pathList = new ArrayList();
         int costE2 = bfs.BFSsearch(grid2, 13, 2, 3, 2, E2pathList);
-        System.out.println("\n finished BFS to E2, cost of: " + costE2);
+        System.out.println("\n finished BFS to E2, total nodes explored: " + costE2);
         E2pathList.forEach(array -> System.out.print(Arrays.toString(array)));
 
     //start at 0,0, end on 24,24
         int[][] grid3 = resetGrid();
         List<int[]> E3pathList = new ArrayList();
         int costE3 = bfs.BFSsearch(grid3, 0, 0, 24, 24, E3pathList);
-        System.out.println("\n finished BFS to (24,24), cost of: " + costE3);
+        System.out.println("\n finished BFS to (24,24), total nodes explored: " + costE3);
         E3pathList.forEach(array -> System.out.print(Arrays.toString(array)));
 
 
@@ -32,19 +32,19 @@ public class Main {
         int[][] gridDFS1 = resetGrid();
         List<int[]> E1pathListDFS = new ArrayList();
         int costDFSE1 = dfs.DFSSearch(gridDFS1, 13, 2, 5, 23, E1pathListDFS);
-        System.out.println("\n finished DFS to E1, cost of: " + costDFSE1);
+        System.out.println("\n finished DFS to E1, total nodes explored: " + costDFSE1);
         E1pathListDFS.forEach(array -> System.out.print(Arrays.toString(array)));
 
         int[][] gridDFS2 = resetGrid();
         List<int[]> E2pathListDFS = new ArrayList();
         int costDFSE2 = dfs.DFSSearch(gridDFS2, 13, 2, 3, 2, E2pathListDFS);
-        System.out.println("\n finished DFS to E2, cost of: " + costDFSE2);
+        System.out.println("\n finished DFS to E2, total nodes explored: " + costDFSE2);
         E2pathListDFS.forEach(array -> System.out.print(Arrays.toString(array)));
 
         int[][] gridDFS3 = resetGrid();
         List<int[]> E3pathListDFS = new ArrayList();
         int costDFSE3 = dfs.DFSSearch(gridDFS3, 0, 0, 24, 24, E3pathListDFS);
-        System.out.println("\n finished DFS to (24,24), cost of: " + costDFSE3);
+        System.out.println("\n finished DFS to (24,24), total nodes explored: " + costDFSE3);
         E3pathListDFS.forEach(array -> System.out.print(Arrays.toString(array)));
 
         AStar aStar = new AStar();

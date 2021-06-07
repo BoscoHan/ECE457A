@@ -6,7 +6,7 @@ public class AStar {
     public int[][] directions= {{1,0},{-1,0},{0,1},{0,-1}};
 
     public int AStar (int[][] grid, int startX, int startY, int endI, int endJ, List<int[]> pathList) {
-        int cost = 0;
+        int nodesExplored = 0;
         Comparator<Node> customComparator = new Comparator<Node>() {
             @Override
             public int compare(Node s1, Node s2) {
@@ -23,17 +23,23 @@ public class AStar {
         while (!pq.isEmpty()) {
             Node currNode = pq.poll();
             int i = currNode.I, j = currNode.J;
+            if (grid[i][j] == -1)
+                continue;
+
+            if (i == endI && j == endJ)
+                System.out.println("found target after exploring "+nodesExplored+ " nodes");
+
 
             //check out of bounds, and skip if cell is blocked/visited:
-            if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length || grid[i][j] != 0)
+            if (i < 0 || j < 0 || i >= grid.length || j >= grid[i].length)
                 continue;
 
             //reached end, quit:
             if (i == endI && j == endJ)
-                return cost+1;
+                return nodesExplored+1;
 
             grid[i][j] = -1; //mark as visited
-            cost++;
+            nodesExplored++;
             pathList.add(new int[] {i, j});
 
             for(int k = 0; k < directions.length; k++) {
@@ -41,7 +47,7 @@ public class AStar {
                 pq.offer(new Node(r, c));
             }
         }
-        return cost;
+        return nodesExplored;
     }
 }
 
